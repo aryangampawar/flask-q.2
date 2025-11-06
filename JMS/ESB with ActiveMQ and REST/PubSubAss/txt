@@ -1,0 +1,6 @@
+Start ActiveMQ: navigate to the bin folder and run ./activemq start (web console: http://localhost:8161/admin)
+Open the assignment project zip in IntelliJ as a new project
+Configure Maven: run mvn clean install
+Run ESBRoute.java (main method)
+Create two run configurations for MessageSubscriber.java: Sub1 and Sub2
+Run MessageWebService.java (REST endpoint at http://localhost:8080/publish)
