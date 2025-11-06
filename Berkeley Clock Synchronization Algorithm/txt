@@ -1,0 +1,3 @@
+Save Berkeley.java inside a folder named fourth_updated
+From the parent directory, compile: javac fourth_updated/Berkeley.java
+Run: java fourth_updated.Berkeley

@@ -1,0 +1,3 @@
+javac EchoServer.java EchoClient.java
+java EchoServer
+In another terminal: java EchoClient

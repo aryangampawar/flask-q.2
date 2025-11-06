@@ -1,0 +1,6 @@
+Step 1: Open PowerShell in your Assignment2 folder
+Step 2: Compile all Java files: javac Adder.java AdderRemote.java MyServer.java MyClient.java
+Step 3: Start the Server (creates the RMI Registry): java MyServer
+Step 4: Open a new PowerShell window and run the client: java MyClient
+Step 5: (Optional) Launch more clients in separate windows to test multiple connections
+Step 6: Stop the server with Ctrl + C

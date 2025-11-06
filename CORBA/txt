@@ -1,0 +1,66 @@
+Example 1: Calculator Service
+1. Install Zulu JDK (with CORBA) and add its 'bin' folder to your PATH.
+2. Create a folder `CalculatorApp` and place `Calculator.idl` inside it.
+3. Run `idlj -fall Calculator.idl`. This creates a nested `CalculatorApp/CalculatorApp` directory.
+4. Place `CalculatorImpl.java`, `Server.java`, `Client1.java`, and `Client2.java` inside the *nested* `CalculatorApp/CalculatorApp` directory (alongside the generated files).
+5. Compile from the *outer* `CalculatorApp` folder: `javac CalculatorApp/*.java`
+6. Terminal 1: `orbd -ORBInitialPort 1050`
+7. Terminal 2: `java CalculatorApp.Server -ORBInitialHost localhost -ORBInitialPort 1050`
+8. Terminal 3: `java CalculatorApp.Client1 -ORBInitialHost localhost -ORBInitialPort 1050`
+9. Terminal 4: `java CalculatorApp.Client2 -ORBInitialHost localhost -ORBInitialPort 1050`
+
+
+Example 2: String Service
+1. Install Zulu JDK (with CORBA) and add its 'bin' folder to your PATH.
+2. Create a folder `StringApp` and place `String.idl` inside it.
+3. Run `idlj -fall String.idl`. This creates a nested `StringApp/StringApp` directory.
+4. Place `StringImpl.java`, `Server.java`, `Client1.java`, and `Client2.java` inside the *nested* `StringApp/StringApp` directory.
+5. Compile from the *outer* `StringApp` folder: `javac StringApp/*.java`
+6. Terminal 1: `orbd -ORBInitialPort 1050`
+7. Terminal 2: `java StringApp.Server -ORBInitialHost localhost -ORBInitialPort 1050`
+8. Terminal 3: `java StringApp.Client1 -ORBInitialHost localhost -ORBInitialPort 1050`
+9. Terminal 4: `java StringApp.Client2 -ORBInitialHost localhost -ORBInitialPort 1050`
+
+
+Example 3: Factorial Service
+1. Install Zulu JDK (with CORBA) and add its 'bin' folder to your PATH.
+2. Create a folder `FactorialApp` and place `Factorial.idl` inside it.
+3. Run `idlj -fall Factorial.idl`. This creates `FactorialApp/FactorialApp`.
+4. Place `FactorialImpl.java`, `Server.java`, `Client1.java`, and `Client2.java` inside `FactorialApp/FactorialApp`.
+5. (Check) Check the generated `FactorialApp/FactorialOperations.java` file. If it uses `int`, modify your `FactorialImpl.java` to use `int` as per the note.
+6. Compile from the *outer* `FactorialApp` folder: `javac FactorialApp/*.java`
+7. Terminal 1: `orbd -ORBInitialPort 1050`
+8. Terminal 2: `java FactorialApp.Server -ORBInitialHost localhost -ORBInitialPort 1050`
+9. Terminal 3: `java FactorialApp.Client1 -ORBInitialHost localhost -ORBInitialPort 1050`
+10. Terminal 4: `java FactorialApp.Client2 -ORBInitialHost localhost -ORBInitialPort 1050`
+
+
+Example 4: Simple 'Hello' Service
+1. Install Zulu JDK (with CORBA) and add its 'bin' folder to your PATH.
+2. Create a root project folder.
+3. Create `Hello.idl` in the root folder.
+4. Run `idlj -fall Hello.idl`. This will create a `HelloApp` folder.
+5. Create `HelloApp/HelloImpl.java`.
+6. Create `Server.java` and `Client.java` in the root folder.
+7. Compile: `javac HelloApp/*.java Server.java Client.java` (or `javac HelloApp/HelloImpl.java Server.java Client.java`)
+8. Terminal 1: `orbd -ORBInitialPort 1050`
+9. Terminal 2: `java Server -ORBInitialHost localhost -ORBInitialPort 1050` (Expected: Server ready...)
+10. Terminal 3: `java Client -ORBInitialHost localhost -ORBInitialPort 1050` (Expected: Got reference..., Response from server: Hello, Student...)
+
+
+Example 5: Multi-Service Server (All-in-One)
+1. Install Zulu JDK (with CORBA) and add its 'bin' folder to your PATH.
+2. Create a root project folder. Inside it, create folders: `StringApp`, `CalculatorApp`, `FactorialApp`.
+3. Place `String.idl`, `Calculator.idl`, and `Factorial.idl` in their respective folders.
+4. Run `idlj -fall StringApp/String.idl`
+5. Run `idlj -fall CalculatorApp/Calculator.idl`
+6. Run `idlj -fall FactorialApp/Factorial.idl`
+7. Place `StringImpl.java`, `CalculatorImpl.java`, and `FactorialImpl.java` in their respective *nested* package folders (e.g., `StringApp/StringApp/StringImpl.java`).
+8. Place `Server.java`, `Client1.java`, and `Client2.java` in the root project folder.
+9. Compile: `javac StringApp/*.java CalculatorApp/*.java FactorialApp/*.java Server.java Client1.java Client2.java`
+10. (Troubleshooting): If compilation fails, check `FactorialApp/FactorialOperations.java`. Match the `compute` method signature in `FactorialImpl.java` (e.g., `int compute(int n)`) and recompile.
+11. Terminal 1: `orbd -ORBInitialPort 1050`
+12. Terminal 2: `java Server -ORBInitialHost localhost -ORBInitialPort 1050` (Expected: ✅ All services registered.)
+13. Terminal 3: `java Client1 -ORBInitialHost localhost -ORBInitialPort 1050` (Expected: Reverse: detubirtsiD, Upper: COMPUTING)
+14. Terminal 4: `java Client2 -ORBInitialHost localhost -ORBInitialPort 1050` (Expected: Addition: 30.0, Multiplication: 20.0, Factorial(5): 120)
+15. (Re-run): If 'Address already in use' error, use a new port in all commands (e.g., 1051).
